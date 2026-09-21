@@ -149,4 +149,32 @@ public class ProdutoController {
     }
 
 
+    /**
+     * Remove um produto existente
+     * @param id Identificador do produto a ser removido
+     * */
+    @Operation(
+            summary = "Remove um produto",
+            description = "Remove permanentemente um produto do catálogo com base no seu identificador"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "Produto removido com sucesso"
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Produto não encontrado",
+                    content = @Content(schema = @Schema(implementation = ErroResponse.class))
+            )
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(
+            @Parameter(description = "identificador único do produto", example = "1")
+            @PathVariable Long id
+    ){
+        service.remover(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
