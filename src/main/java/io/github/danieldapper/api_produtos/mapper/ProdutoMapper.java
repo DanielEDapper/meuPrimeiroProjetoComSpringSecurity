@@ -4,8 +4,11 @@ import io.github.danieldapper.api_produtos.dto.ProdutoCreateRequest;
 import io.github.danieldapper.api_produtos.dto.ProdutoResponse;
 import io.github.danieldapper.api_produtos.dto.ProdutoUpdateRequest;
 import io.github.danieldapper.api_produtos.entity.Produto;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class ProdutoMapper
 {
     /**
@@ -36,10 +39,12 @@ public class ProdutoMapper
                 .map(this::toResponse)
                 .toList();
     }
-    public void updateEntity(ProdutoUpdateRequest request, Produto produto) {
+    public Produto updateEntity(ProdutoUpdateRequest request, Produto produto) {
         produto.setNome(request.nome());
         produto.setPreco(request.preco());
         produto.setAtivo(request.ativo());
+
+        return produto;
     }
 
 }

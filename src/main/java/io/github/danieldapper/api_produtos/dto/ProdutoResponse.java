@@ -1,6 +1,7 @@
 package io.github.danieldapper.api_produtos.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 /**
@@ -15,7 +16,6 @@ import java.math.BigDecimal;
  *
  * * */
 @Schema(description = "Dados utilizados para cadastrar um produto")
-
 
 public record ProdutoCreateRequest(
         @Schema(

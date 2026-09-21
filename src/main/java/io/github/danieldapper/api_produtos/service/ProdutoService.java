@@ -7,10 +7,13 @@ import io.github.danieldapper.api_produtos.entity.Produto;
 import io.github.danieldapper.api_produtos.exception.ProdutoNaoEncontradoException;
 import io.github.danieldapper.api_produtos.mapper.ProdutoMapper;
 import io.github.danieldapper.api_produtos.repository.ProdutoRepository;
+import io.swagger.v3.oas.annotations.servers.Server;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class ProdutoService
 {
     private final ProdutoRepository repository;
@@ -70,15 +73,15 @@ public class ProdutoService
                 .toList();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public ProdutoResponse atualizar(Long id, ProdutoUpdateRequest request)
     {
         Produto produto = repository.findById(id)
                 .orElseThrow(() -> new
                         ProdutoNaoEncontradoException("Produto não encontrado com o ID:" + id));
 
-        mapper.updateEntity(request, produto);
-        Produto atualizado = repository.save(produto);
+        Produto produtoAtt = mapper.updateEntity(request, produto);
+        Produto atualizado = repository.save(produtoAtt);
 
         return mapper.toResponse(atualizado);
     }
